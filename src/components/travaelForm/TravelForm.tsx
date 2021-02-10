@@ -48,7 +48,13 @@ const initial: Travel = {
   zoneCount: 0,
 };
 
-export const TravelForm: FC = () => {
+type TravelFormProps = {
+  onAdd?: () => void;
+}
+
+export const TravelForm: FC<TravelFormProps> = ({
+  onAdd,
+}: TravelFormProps) => {
   const [currentTravel, setCurrentTravel] = useState<Travel>(initial);
   const { travels } = useTravels();
   const { addTravel } = useCurrentTravels();
@@ -79,6 +85,7 @@ export const TravelForm: FC = () => {
       });
       reset();
       setCurrentTravel(initial);
+      if (onAdd) onAdd();
     }
   }
 

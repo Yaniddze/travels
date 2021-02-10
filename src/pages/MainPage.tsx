@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import { Dialog } from '@material-ui/core';
 import styled from 'styled-components';
 
 import {
@@ -10,6 +11,11 @@ import {
   TravelForm,
 } from '../components';
 
+const DialogContent = styled.div`
+  margin: 20px;
+  padding: 20px;
+`;
+
 const MainPageWrapper = styled.div`
   display: flex;
   > * {
@@ -18,15 +24,30 @@ const MainPageWrapper = styled.div`
   }
 `;
 
-export const MainPage: FC = () => (
-  <MainPageWrapper>
-    <div>
-      <Search />
+export const MainPage: FC = () => { 
+  const [open, setOpen] = useState(false);
+
+  return (
+    <MainPageWrapper>
+      <Dialog 
+        open={open}
+        onClose={() => setOpen(false)}
+        onSubmit={() => setOpen(false)}
+      >
+        <DialogContent>
+          Поездка добавлена
+        </DialogContent>
+      </Dialog>
       <div>
-        <h2>Акции</h2>
-        <Sales />
+        <Search />
+        <div>
+          <h2>Акции</h2>
+          <Sales />
+        </div>
+        <TravelForm 
+          onAdd={() => setOpen(true)}
+        />
       </div>
-      <TravelForm />
-    </div>
-  </MainPageWrapper>
-)
+    </MainPageWrapper>
+  );
+}
