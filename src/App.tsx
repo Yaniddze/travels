@@ -3,7 +3,7 @@ import {
   GlobalStyles,
   Routes,
 } from './appConfig';
-import { Header, } from './components';
+import { Header, Footer, } from './components';
 
 export const App: FC = () => (
   <div>
@@ -15,9 +15,7 @@ export const App: FC = () => (
       <Routes />
     </div>
     <div id="footer">
-      <div>
-        footer
-      </div>
+      <Footer />
     </div>
   </div>
 );
