@@ -6,6 +6,10 @@ import {
   Search,
 } from '../pageParts';
 
+import {
+  TravelForm,
+} from '../components';
+
 const MainPageWrapper = styled.div`
   display: flex;
   > * {
@@ -22,6 +26,7 @@ export const MainPage: FC = () => (
         <h2>Акции</h2>
         <Sales />
       </div>
+      <TravelForm />
     </div>
   </MainPageWrapper>
 )

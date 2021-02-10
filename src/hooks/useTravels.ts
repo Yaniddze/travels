@@ -15,9 +15,14 @@ class Storage {
     { name: 'Поездка 1', difficult: 'Легко', region: 'Москва', dateEnd: new Date(), dateStart: new Date(), zoneCount: 2 },
   ];
 
+  public setTravels = (newTravels: Travel[]) => {
+    this.travels = newTravels;
+  } 
+
   constructor() {
     makeObservable(this, {
       travels: observable,
+      setTravels: action,
     })
   }
 }
@@ -28,7 +33,7 @@ export const useTravels = () => {
   const [travels, setTravels] = useState(inst.travels);
 
   useEffect(autorun(() => {
-    setTravels(inst.travels);
+    inst.setTravels(travels);
   }));
 
   return {
