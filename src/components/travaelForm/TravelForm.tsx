@@ -73,7 +73,7 @@ export const TravelForm: FC<TravelFormProps> = ({
   }
 
   const onClick = (data: FormType) => {
-    if (currentTravel !== undefined) {
+    if (currentTravel.name !== '') {
       addTravel({ 
         username: data.name,
         name: currentTravel.name, 
