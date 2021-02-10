@@ -63,16 +63,20 @@ export const TravelForm: FC = () => {
     name?: string | undefined;
     value: unknown;
   }>) => {
-    if (e.target.value !== null) {
-      setCurrentTravel(travels.find(x => x.name === e.target.value) || initial)
-    }
+    setCurrentTravel(travels.find(x => x.name === e.target.value) || initial)
   }
 
   const onClick = (data: FormType) => {
-    const travel = travels.find(x => x.name === data.travel) || initial;
-
-    if (travel !== undefined) {
-      addTravel({ ...travel, name: data.name });
+    if (currentTravel !== undefined) {
+      addTravel({ 
+        username: data.name,
+        name: currentTravel.name, 
+        dateEnd: currentTravel.dateEnd,
+        dateStart: currentTravel.dateStart,
+        region: currentTravel.region,
+        zoneCount: currentTravel.zoneCount,
+        difficult: currentTravel.difficult,
+      });
       reset();
       setCurrentTravel(initial);
     }

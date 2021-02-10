@@ -1,40 +1,33 @@
-import { useState, useEffect } from 'react';
-import { observable, action, makeObservable, autorun } from 'mobx';
+import { useState } from 'react';
 import { Travel } from './useTravels';
 
 type StoragedTravel = Travel & {
-  name: string;
+  username: string,
 }
 
-class Storage {
-  public travels: StoragedTravel[] = [];
+const getTravels = () => {
+  const items = localStorage.getItem('cTravels');
 
-  public setTravels = (newTravels: StoragedTravel[]) => {
-    this.travels = newTravels;
-  } 
-
-  constructor() {
-    makeObservable(this, {
-      travels: observable,
-      setTravels: action,
-    })
-  }
+  return JSON.parse(items || "[]");
 }
 
-const inst = new Storage();
+const setLocalTravels = (travels: StoragedTravel[]) => {
+  localStorage.setItem('cTravels', JSON.stringify(travels));
+}
 
 export const useCurrentTravels = () => {
-  const [currentTravels, setCurrentTravels] = useState(inst.travels);
+  const [currentTravels, setCurrentTravels] = useState<StoragedTravel[]>(getTravels);
 
-  useEffect(() => autorun(() => {
-    setCurrentTravels(inst.travels);
-  }), []);
+  const setTravels = (travels: StoragedTravel[]) => {
+    setCurrentTravels(travels);
+    setLocalTravels(travels);
+  }
 
   return {
     travels: currentTravels,
-    setTravels: inst.setTravels.bind(inst),
+    setTravels,
     addTravel: (travel: StoragedTravel) => {
-      inst.setTravels([...currentTravels, travel]);
+      setTravels([...currentTravels, travel]);
     }
   }
 }

@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import {
   MainPage,
   SearchPage,
+  MyBookingPage,
 } from '../pages';
 
 export const Routes: FC = () => (
@@ -13,6 +14,9 @@ export const Routes: FC = () => (
     </Route>
     <Route path="/search" exact>
       <SearchPage />
+    </Route>
+    <Route path="/mybooking" exact>
+      <MyBookingPage />
     </Route>
     <Redirect to="/" />
   </Switch>

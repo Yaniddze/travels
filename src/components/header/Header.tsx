@@ -36,10 +36,6 @@ export const Header: FC = () => {
           label="Главная страница"
         />
         <NavLink 
-          route="/booking"
-          label="Бронирование"
-        />
-        <NavLink 
           route="/mybooking"
           label="Мои поездки"
         />
