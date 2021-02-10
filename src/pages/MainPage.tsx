@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import {
   Sales,
+  Search,
 } from '../pageParts';
 
 const MainPageWrapper = styled.div`
@@ -16,7 +17,11 @@ const MainPageWrapper = styled.div`
 export const MainPage: FC = () => (
   <MainPageWrapper>
     <div>
-      <Sales />
+      <Search />
+      <div>
+        <h2>Акции</h2>
+        <Sales />
+      </div>
     </div>
   </MainPageWrapper>
 )
