@@ -8,7 +8,7 @@ import {
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { Travel, useTravels } from "../../hooks";
+import { Travel, useTravels, useCurrentTravels, } from "../../hooks";
 
 const Wrapper = styled.div`
   > div > * {
@@ -51,10 +51,12 @@ const initial: Travel = {
 export const TravelForm: FC = () => {
   const [currentTravel, setCurrentTravel] = useState<Travel>(initial);
   const { travels } = useTravels();
+  const { addTravel } = useCurrentTravels();
   const {
     register,
     handleSubmit,
     errors,
+    reset,
   } = useForm<FormType>();
 
   const onTravelChange = (e: React.ChangeEvent<{
@@ -70,7 +72,9 @@ export const TravelForm: FC = () => {
     const travel = travels.find(x => x.name === data.travel) || initial;
 
     if (travel !== undefined) {
-      
+      addTravel({ ...travel, name: data.name });
+      reset();
+      setCurrentTravel(initial);
     }
   }
 

@@ -32,7 +32,7 @@ const inst = new Storage();
 export const useTravels = () => {
   const [travels, setTravels] = useState(inst.travels);
 
-  useEffect(autorun(() => {
+  useEffect(() => autorun(() => {
     inst.setTravels(travels);
   }));
 
